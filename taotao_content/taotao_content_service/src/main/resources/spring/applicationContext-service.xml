@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+
+   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--组件扫描-->
+    <context:component-scan base-package="com.taotao.content.service"></context:component-scan>
+    <!--发布dubbo服务-->
+    <!--application指定服务的应用是谁taotao_manager-->
+    <dubbo:application name="taotao_content"></dubbo:application>
+    <!--配置连接注册中心的地址和端口以及使用的协议：zookeeper-->
+    <dubbo:registry address="10.0.127.156" protocol="zookeeper" port="2181"></dubbo:registry>
+
+    <!--暴露本地服务的端口-->
+    <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+
+    <!--发布服务-->
+    <dubbo:service interface="com.taotao.content.service.ContentCategoryService" ref="contentCategoryServiceImpl" timeout="1000000"></dubbo:service>
+
+
+</beans>
